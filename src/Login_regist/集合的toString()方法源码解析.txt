@@ -1,0 +1,23 @@
+代码：
+    Collection c = new ArrayList();
+    c.add("hello");
+    c.add("world");
+    c.add("java");
+
+    System.out.println(c);
+
+为什么c输出的不是地址值呢？
+    A：Collection c = new ArrayList();
+    这是多态，所以输出c的to String()方法，其实是输出ArrayList的toString()
+
+    B：看ArrayList的toString()方法
+        而我们在ArrayList中却没有发现toString()方法
+        可以从父类中找
+    C：toString()方法的源码
+        Iterator it = iterator();//集合本身调用迭代器方法，得到集合迭代器
+        for(;;)//控制死循环
+        E e = ti.next(); //e = hello
+        sb.append(e == this? "(this Collection)":e);
+        if(! it.hasNext())
+            reutrn sb.append(']').toString;
+            sb.append(',').append(' ');
